@@ -34,18 +34,4 @@ public class SeriesModel {
     @Column(name = "deger")
     private Double deger;
 
-    @Getter
-    @Setter
-//    @Temporal(value = "UST")
-    private Double ust;
-
-    @Getter
-    @Setter
-//    @Temporal("ALT")
-    private Double alt;
-
-    @Getter
-    @Setter
-//    @Temporal("FARK")
-    private Double fark;
 }
