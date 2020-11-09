@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: bist-daily
+  datasource:
+    url: ${MYSQL_URL:jdbc:mysql://localhost:3306/bistdaily}
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:microservice-app}
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: create
