@@ -5,9 +5,9 @@ spring:
   application:
     name: bist-daily
   datasource:
-    url: ${MYSQL_URL:jdbc:mysql://remotemysql.com:3306/Z63e7BzMKu}
-    username: ${MYSQL_USERNAME:Z63e7BzMKu}
-    password: ${MYSQL_PASSWORD:aB2cg96P6a}
+    url: ${MYSQL_URL:jdbc:mysql://localhost:3306/bistdaily}
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:microservice-app}
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

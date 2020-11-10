@@ -24,25 +24,32 @@ public class FetchData {
         this.baseUrl = baseUrl;
     }
 
-    public List<SeriesModel> getData() throws UnirestException {
-        HttpResponse<JsonNode> response = Unirest.get(baseUrl.getBaseUrl()).asJson();
-        JSONArray seriesData = response.getBody().getObject().getJSONArray("SeriesData");
-        List<SeriesModel> seriesModels = new ArrayList<>();
-        for (Object i:seriesData){
-            System.out.println(baseUrl.getFirmaAdi()+" işlem yapılıyor");
-            SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd");
+    public List<SeriesModel> getData()  {
+        try {
+
+            HttpResponse<JsonNode> response = Unirest.get(baseUrl.getBaseUrl()).asJson();
+            JSONArray seriesData = response.getBody().getObject().getJSONArray("SeriesData");
+            List<SeriesModel> seriesModels = new ArrayList<>();
+            for (Object i:seriesData){
+                SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd");
 
 
-            JSONArray gunlukData = (JSONArray) i;
-            LocalDate myDate = Instant.ofEpochMilli(gunlukData.getLong(0)).atZone(ZoneId.systemDefault()).toLocalDate();
-            String strDate = sm.format(gunlukData.getLong(0));
-            SeriesModel s = new SeriesModel();
-            s.setTarih(strDate);
-            s.setFirma(baseUrl.getFirmaAdi());
-            s.setDeger(gunlukData.getDouble(1));
-            seriesModels.add(s);
+                JSONArray gunlukData = (JSONArray) i;
+                System.out.println(baseUrl.getFirmaAdi()+" işlem yapılıyor "+gunlukData.toString());
+                LocalDate myDate = Instant.ofEpochMilli(gunlukData.getLong(0)).atZone(ZoneId.systemDefault()).toLocalDate();
+                String strDate = sm.format(gunlukData.getLong(0));
+                SeriesModel s = new SeriesModel();
+                s.setTarih(strDate);
+                s.setFirma(baseUrl.getFirmaAdi());
+                s.setDeger(gunlukData.getDouble(1));
+                seriesModels.add(s);
+            }
+            return seriesModels;
+        }catch (UnirestException a){
+            System.out.println("hata");
+
         }
-        return seriesModels;
+        return new ArrayList<>();
     }
 
     public static void main(String[] args) throws UnirestException, ParseException {
